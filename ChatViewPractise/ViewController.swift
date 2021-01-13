@@ -8,7 +8,12 @@
 import UIKit
 
 
-let BOTTOM_GAP_TEXT_MESSAGE = 20
+class CellIds {
+    
+    static let senderCellId = "senderCellId"
+    
+    static let receiverCellId = "receiverCellId"
+}
 
 class ViewController: UIViewController,UITextViewDelegate {
     
@@ -17,15 +22,34 @@ class ViewController: UIViewController,UITextViewDelegate {
     @IBOutlet var inputViewContainer: UIView!
     @IBOutlet var txtMessageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var inputViewContainerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var tableView: UITableView!
     
     //variables
     var shouldMoveUp : Bool = true
     var placeholderLabel : UILabel!
+    var items = [String]()
+    
+    var bottomHeight: CGFloat {
+        guard #available(iOS 11.0, *),
+            let window = UIApplication.shared.keyWindow else {
+                return 0
+        }
+        return window.safeAreaInsets.bottom
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         //setup input accessory
         setupInputAccessory()
+        //setup chat table view
+        setupChatView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+            self.tableView.scrollToRow(at: IndexPath(row: self.items.count - 1, section: 0), at: .none, animated: false)
+        })
+        
     }
 }
 
@@ -37,9 +61,12 @@ extension ViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         txtMessage.delegate = self
-        
+        //set up tool bar
         setupToolbar()
+        //setup placeholder
         setupPlaceholder()
+        
+        
         //Looks for single or multiple taps.
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         
@@ -122,6 +149,11 @@ extension ViewController {
             inputViewContainerBottomConstraint.constant -= keyboardSize.height
             print("key")
             shouldMoveUp = false
+           // let oldOffset = self.tableView.contentOffset
+            UIView.animate(withDuration: 0.1) {
+                self.view.layoutIfNeeded()
+               // self.tableView.setContentOffset(CGPoint(x: oldOffset.x, y: oldOffset.y + keyboardSize.height - self.bottomHeight), animated: false)
+            }
         }
     }
     
@@ -131,6 +163,55 @@ extension ViewController {
             inputViewContainerBottomConstraint.constant = 0
         }
         
+    }
+}
+
+//chat table view extension
+extension ViewController: UITableViewDataSource {
+    
+    func setupChatView(){
+     //   tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: CellIds.receiverCellId)
+        tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: CellIds.senderCellId)
+        tableView.separatorStyle = .none
+        tableView.keyboardDismissMode = .onDrag
+        for _ in 0...50 {
+            items.append(randomString(length: Int.random(in: 2...50)))
+        }
+        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row % 2 == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "recevierCell", for: indexPath) as? RecevierTableViewCell {
+                cell.selectionStyle = .none
+                cell.txtChatMessage.text = items[indexPath.section]
+                cell.txtChatMessage.sizeToFit()
+                //cell.showTopLabel = false
+                return cell
+            }
+        }
+        else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "senderCell", for: indexPath) as? SenderTableViewCell {
+                cell.selectionStyle = .none
+                cell.txtChatMessage.text = items[indexPath.section]
+                return cell
+            }
+        }
+        return UITableViewCell()
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 

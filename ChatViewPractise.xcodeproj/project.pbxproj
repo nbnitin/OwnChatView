@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C3108A5125AEB97F0071798F /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3108A5025AEB97F0071798F /* MessageTableViewCell.swift */; };
+		C3108A5425AEBA1D0071798F /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3108A5325AEBA1D0071798F /* Utilities.swift */; };
+		C3108A5725AEC1E80071798F /* RecevierTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3108A5625AEC1E80071798F /* RecevierTableViewCell.swift */; };
+		C3108A5A25AEE5540071798F /* SenderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3108A5925AEE5540071798F /* SenderTableViewCell.swift */; };
 		C39523AE25AC72BA004841E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39523AD25AC72BA004841E6 /* AppDelegate.swift */; };
 		C39523B025AC72BA004841E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39523AF25AC72BA004841E6 /* SceneDelegate.swift */; };
 		C39523B225AC72BA004841E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39523B125AC72BA004841E6 /* ViewController.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C3108A5025AEB97F0071798F /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		C3108A5325AEBA1D0071798F /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		C3108A5625AEC1E80071798F /* RecevierTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecevierTableViewCell.swift; sourceTree = "<group>"; };
+		C3108A5925AEE5540071798F /* SenderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderTableViewCell.swift; sourceTree = "<group>"; };
 		C39523AA25AC72BA004841E6 /* ChatViewPractise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatViewPractise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39523AD25AC72BA004841E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C39523AF25AC72BA004841E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +71,10 @@
 				C39523B625AC72BE004841E6 /* Assets.xcassets */,
 				C39523B825AC72BE004841E6 /* LaunchScreen.storyboard */,
 				C39523BB25AC72BE004841E6 /* Info.plist */,
+				C3108A5025AEB97F0071798F /* MessageTableViewCell.swift */,
+				C3108A5325AEBA1D0071798F /* Utilities.swift */,
+				C3108A5625AEC1E80071798F /* RecevierTableViewCell.swift */,
+				C3108A5925AEE5540071798F /* SenderTableViewCell.swift */,
 			);
 			path = ChatViewPractise;
 			sourceTree = "<group>";
@@ -138,7 +150,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C39523B225AC72BA004841E6 /* ViewController.swift in Sources */,
+				C3108A5125AEB97F0071798F /* MessageTableViewCell.swift in Sources */,
 				C39523AE25AC72BA004841E6 /* AppDelegate.swift in Sources */,
+				C3108A5A25AEE5540071798F /* SenderTableViewCell.swift in Sources */,
+				C3108A5425AEBA1D0071798F /* Utilities.swift in Sources */,
+				C3108A5725AEC1E80071798F /* RecevierTableViewCell.swift in Sources */,
 				C39523B025AC72BA004841E6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
