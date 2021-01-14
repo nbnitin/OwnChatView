@@ -165,6 +165,9 @@
                                             <constraint firstAttribute="height" constant="40" id="D2B-Bg-dNd"/>
                                         </constraints>
                                         <state key="normal" title="Send"/>
+                                        <connections>
+                                            <action selector="btnSendAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8km-dg-bSV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.75" alpha="0.62923635563380287" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -202,6 +205,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xfb-h8-kxI"/>
                     <connections>
+                        <outlet property="btnSend" destination="m9q-9x-ARN" id="Uzf-UP-95b"/>
                         <outlet property="inputViewContainer" destination="OLC-MP-7ea" id="J6Z-Xz-GN5"/>
                         <outlet property="inputViewContainerBottomConstraint" destination="b2U-dc-ZcI" id="cgQ-SZ-FRe"/>
                         <outlet property="tableView" destination="mAx-6m-vBQ" id="ngl-lh-2XO"/>

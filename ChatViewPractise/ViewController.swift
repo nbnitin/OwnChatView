@@ -23,11 +23,12 @@ class ViewController: UIViewController,UITextViewDelegate {
     @IBOutlet var txtMessageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var inputViewContainerBottomConstraint: NSLayoutConstraint!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var btnSend: UIButton!
     
     //variables
     var shouldMoveUp : Bool = true
     var placeholderLabel : UILabel!
-    var items = [String]()
+    var items = [MessageModel]()
     
     var bottomHeight: CGFloat {
         guard #available(iOS 11.0, *),
@@ -51,11 +52,27 @@ class ViewController: UIViewController,UITextViewDelegate {
         })
         
     }
+    
+    // MARK: send button action
+    @IBAction func btnSendAction(_ sender: Any) {
+        items.append(MessageModel.createMessage(messageText: txtMessage.text, messageType: .Text, isSent: false, date: MessageModel.getMessageDate(date: Date())))
+        tableView.reloadData()
+        self.tableView.scrollToRow(at: IndexPath(row: self.items.count - 1, section: 0), at: .none, animated: false)
+        clearTextBoxOfMessage()
+    }
+    
+    //MARK: clear text after sending message
+    func clearTextBoxOfMessage(){
+        txtMessage.text = ""
+        placeholderLabel.isHidden = false
+        btnSend.isEnabled = false
+    }
+    
 }
 
 
 extension ViewController {
-    
+    // MARK: sets up input accessory
     func setupInputAccessory(){
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -111,34 +128,47 @@ extension ViewController {
         placeholderLabel.isHidden = !txtMessage.text.isEmpty
     }
     
+    // MARK: text view delegates
     func textViewDidChange(_ textView: UITextView)
     {
         let isOversize = textView.contentSize.height >= txtMessageHeightConstraint.constant
         txtMessageHeightConstraint.isActive = isOversize
         txtMessage.isScrollEnabled = isOversize
         print(isOversize)
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        placeholderLabel.isHidden = true
-
-//        if txtMessage.textColor == UIColor.lightGray {
-//            txtMessage.text = ""
-//            txtMessage.textColor = UIColor.black
-//        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-
-        if txtMessage.text == "" {
-//
-//            txtMessage.text = "Placeholder text ..."
-//            txtMessage.textColor = UIColor.lightGray
+        
+        if textView.text == "" {
             placeholderLabel.isHidden = false
+            btnSend.isEnabled = false
+        } else {
+            placeholderLabel.isHidden = true
+            btnSend.isEnabled = true
         }
     }
     
-    //keyboardHandler
+    /* for now this block is not required, as this is being handled in text did change event
+     
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+////        placeholderLabel.isHidden = true
+////        btnSend.isEnabled = true
+////        if txtMessage.textColor == UIColor.lightGray {
+////            txtMessage.text = ""
+////            txtMessage.textColor = UIColor.black
+////        }
+//    }
+//
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//
+//        if txtMessage.text == "" {
+////
+////            txtMessage.text = "Placeholder text ..."
+////            txtMessage.textColor = UIColor.lightGray
+//            placeholderLabel.isHidden = false
+//            btnSend.isEnabled = false
+//        }
+    }
+     */
+    
+    // MARK: handles keyboard will show
     @objc func keyboardWillShow(notification: NSNotification) {
         if !shouldMoveUp {
             return
@@ -157,6 +187,7 @@ extension ViewController {
         }
     }
     
+    // MARK: handles keyboard will hide
     @objc func keyboardWillHide(notification: NSNotification) {
         shouldMoveUp = true
         if let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -174,8 +205,10 @@ extension ViewController: UITableViewDataSource {
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: CellIds.senderCellId)
         tableView.separatorStyle = .none
         tableView.keyboardDismissMode = .onDrag
-        for _ in 0...50 {
-            items.append(randomString(length: Int.random(in: 2...50)))
+        for index in 0...50 {
+            let date = MessageModel.getMessageDate(date: Date())
+            let message = MessageModel.createMessage(messageText: randomString(length: Int.random(in: 2...50)), messageType: .Text, isSent: (index % 2 == 0),date: date)
+            items.append(message)
         }
         
     }
@@ -189,11 +222,12 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row % 2 == 0 {
+        if !items[indexPath.row].isSent {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "recevierCell", for: indexPath) as? RecevierTableViewCell {
                 cell.selectionStyle = .none
-                cell.txtChatMessage.text = items[indexPath.section]
+                cell.txtChatMessage.text = items[indexPath.row].messageText
                 cell.txtChatMessage.sizeToFit()
+                cell.lblDate.text = items[indexPath.row].date
                 //cell.showTopLabel = false
                 return cell
             }
@@ -201,7 +235,8 @@ extension ViewController: UITableViewDataSource {
         else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "senderCell", for: indexPath) as? SenderTableViewCell {
                 cell.selectionStyle = .none
-                cell.txtChatMessage.text = items[indexPath.section]
+                cell.txtChatMessage.text = items[indexPath.row].messageText
+                cell.lblDate.text = items[indexPath.row].date
                 return cell
             }
         }
