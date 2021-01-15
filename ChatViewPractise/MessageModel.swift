@@ -2,7 +2,7 @@
 //  MessageModel.swift
 //  ChatViewPractise
 //
-//  Created by Priyanshu Rajput on 1/14/21.
+//  Created by Nitin Bhatia on 1/14/21.
 //
 
 import Foundation

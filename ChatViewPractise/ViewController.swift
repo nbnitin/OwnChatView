@@ -55,7 +55,7 @@ class ViewController: UIViewController,UITextViewDelegate {
     
     // MARK: send button action
     @IBAction func btnSendAction(_ sender: Any) {
-        items.append(MessageModel.createMessage(messageText: txtMessage.text, messageType: .Text, isSent: false, date: MessageModel.getMessageDate(date: Date())))
+        items.append(MessageModel.createMessage(messageText: txtMessage.text, messageType: .Text, isSent: true, date: MessageModel.getMessageDate(date: Date())))
         tableView.reloadData()
         self.tableView.scrollToRow(at: IndexPath(row: self.items.count - 1, section: 0), at: .none, animated: false)
         clearTextBoxOfMessage()
