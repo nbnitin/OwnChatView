@@ -29,6 +29,7 @@ class ViewController: UIViewController,UITextViewDelegate {
     var shouldMoveUp : Bool = true
     var placeholderLabel : UILabel!
     var items = [MessageModel]()
+    var otherUserName : String = "John"
     
     var bottomHeight: CGFloat {
         guard #available(iOS 11.0, *),
@@ -228,6 +229,7 @@ extension ViewController: UITableViewDataSource {
                 cell.txtChatMessage.text = items[indexPath.row].messageText
                 cell.txtChatMessage.sizeToFit()
                 cell.lblDate.text = items[indexPath.row].date
+                cell.lblTop.text = otherUserName
                 //cell.showTopLabel = false
                 return cell
             }

@@ -31,18 +31,27 @@
                                                     <rect key="frame" x="17" y="16" width="118" height="168"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble_received" translatesAutoresizingMaskIntoConstraints="NO" id="khU-jz-1QQ">
-                                                            <rect key="frame" x="-14" y="-10" width="142" height="188"/>
+                                                            <rect key="frame" x="-14.5" y="-10" width="142.5" height="188"/>
                                                             <color key="tintColor" systemColor="systemRedColor"/>
                                                         </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ht-hP-d6M">
+                                                            <rect key="frame" x="18" y="10" width="96" height="17"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="17" id="tbv-tI-KXL"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Lorem ipsum " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Shb-7I-Jky">
-                                                            <rect key="frame" x="6" y="2" width="108" height="144"/>
+                                                            <rect key="frame" x="6" y="37" width="108" height="109"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nai-cx-uy3">
-                                                            <rect key="frame" x="72" y="144" width="42" height="16"/>
+                                                            <rect key="frame" x="60" y="144" width="42" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="eR7-cb-sKt"/>
                                                             </constraints>
@@ -53,16 +62,19 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="Shb-7I-Jky" firstAttribute="top" secondItem="mnd-qw-ueO" secondAttribute="top" constant="2" id="8u7-kr-SNA"/>
+                                                        <constraint firstItem="2ht-hP-d6M" firstAttribute="trailing" secondItem="Shb-7I-Jky" secondAttribute="trailing" id="2Mc-Gi-rzf"/>
+                                                        <constraint firstItem="Shb-7I-Jky" firstAttribute="top" secondItem="2ht-hP-d6M" secondAttribute="bottom" constant="10" id="Mcj-Bu-atw"/>
                                                         <constraint firstItem="khU-jz-1QQ" firstAttribute="leading" secondItem="mnd-qw-ueO" secondAttribute="leading" constant="-14.5" id="OLs-qW-gbw"/>
+                                                        <constraint firstItem="2ht-hP-d6M" firstAttribute="leading" secondItem="Shb-7I-Jky" secondAttribute="leading" constant="12" id="SnJ-jg-dZM"/>
                                                         <constraint firstAttribute="trailing" secondItem="khU-jz-1QQ" secondAttribute="trailing" constant="-10" id="akj-AP-U1v"/>
+                                                        <constraint firstItem="2ht-hP-d6M" firstAttribute="top" secondItem="mnd-qw-ueO" secondAttribute="top" constant="10" id="c2V-ul-oaf"/>
                                                         <constraint firstItem="Shb-7I-Jky" firstAttribute="leading" secondItem="mnd-qw-ueO" secondAttribute="leading" constant="6" id="cY1-jF-Orp"/>
                                                         <constraint firstAttribute="bottom" secondItem="khU-jz-1QQ" secondAttribute="bottom" constant="-10" id="eRy-lZ-0Mg"/>
                                                         <constraint firstItem="nai-cx-uy3" firstAttribute="top" secondItem="Shb-7I-Jky" secondAttribute="bottom" constant="-2" id="fvf-Oe-hYG"/>
                                                         <constraint firstAttribute="bottom" secondItem="nai-cx-uy3" secondAttribute="bottom" constant="8" id="o3D-0E-r9f"/>
                                                         <constraint firstAttribute="trailing" secondItem="Shb-7I-Jky" secondAttribute="trailing" constant="4" id="s1J-Ql-n7t"/>
                                                         <constraint firstItem="khU-jz-1QQ" firstAttribute="top" secondItem="mnd-qw-ueO" secondAttribute="top" constant="-10" id="zY4-dm-VvA"/>
-                                                        <constraint firstItem="nai-cx-uy3" firstAttribute="trailing" secondItem="Shb-7I-Jky" secondAttribute="trailing" id="zYl-Yd-dAf"/>
+                                                        <constraint firstItem="nai-cx-uy3" firstAttribute="trailing" secondItem="Shb-7I-Jky" secondAttribute="trailing" constant="-12" id="zYl-Yd-dAf"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -78,6 +90,7 @@
                                             <outlet property="bgView" destination="mnd-qw-ueO" id="DLQ-Ln-Pgw"/>
                                             <outlet property="imgBubble" destination="khU-jz-1QQ" id="8AU-nD-I5b"/>
                                             <outlet property="lblDate" destination="nai-cx-uy3" id="oHI-EX-AKH"/>
+                                            <outlet property="lblTop" destination="2ht-hP-d6M" id="NYK-ag-tbj"/>
                                             <outlet property="txtChatMessage" destination="Shb-7I-Jky" id="Nt4-rj-BbD"/>
                                         </connections>
                                     </tableViewCell>

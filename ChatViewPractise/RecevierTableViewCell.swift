@@ -10,6 +10,7 @@ let CORNER_RADIUS : CGFloat = 8
 
 class RecevierTableViewCell: UITableViewCell {
 
+    @IBOutlet var lblTop: UILabel!
     @IBOutlet var lblDate: UILabel!
     @IBOutlet var txtChatMessage: UITextView!
     @IBOutlet var bgView: UIView!
